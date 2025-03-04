@@ -1,0 +1,131 @@
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Klasifikasi Ulos</title>
+    {% tailwind_css %}{% load static %}
+  </head>
+  <body class="h-screen">
+    <nav class="bg-blue-500 w-full h-20"></nav>
+    <section class="flex justify-center items-center h-5/6">
+      <div class="bg-gray-100 max-w-max p-10 rounded-lg">
+        <div class="text-blue-900 text-3xl font-bold mb-5">Upload Gambar Ulos</div>
+        <form id="uploadForm" method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+          <!-- input gambar -->
+          <div id="dropzone" class="flex flex-col items-center justify-center w-72 h-40 border-2 border-dashed border-gray-300 rounded-xl p-6 bg-gray-50 cursor-pointer hover:border-blue-500 hover:bg-gray-100">
+            <svg xmlns="http://www.w3.org/2000/svg" id="icon_upload" class="h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1M16 7l-4-4m0 0L8 7m4-4v12" />
+            </svg>
+            <img id="previewImage" class="hidden w-36 h-32 mt-3 mb-3 object-contain rounded-lg" />
+            <p class="text-gray-500 text-sm mt-2" id="text_upload">Drag & Drop or <span class="text-blue-500 font-semibold cursor-pointer">Choose file</span> to upload</p>
+            <p class="text-gray-400 text-xs mt-1" id="text_upload2">PNG, JPG, SVG, WEBP, and GIF are Allowed.</p>
+            <input type="file" class="hidden" id="imageInput" name="image" accept="image/png, image/jpeg, image/svg+xml, image/webp, image/gif" />
+          </div>
+
+          <!-- alert upload gambar -->
+          <div id="alert_file" class="items-center hidden p-4 mb-4 mt-4 text-sm text-green-800 border border-green-300 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400 dark:border-green-800" role="alert">
+            <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+            </svg>
+            <span class="sr-only">Info</span>
+            <div>
+              <span class="font-medium" id="text_alert"></span>
+            </div>
+          </div>
+          <div class="flex justify-center items-center w-full">
+            <button type="submit" class="bg-blue-400 p-3 mt-6 text-white rounded-lg font-semibold hover:bg-blue-500 active:bg-blue-600">Klasifikasikan</button>
+          </div>
+        </form>
+
+        <p id="result"></p>
+      </div>
+    </section>
+    <footer class="bg-blue-500 w-full h-14 absolute bottom-0"></footer>
+    <script>
+      const dropzone = document.getElementById("dropzone");
+      const imageInput = document.getElementById("imageInput");
+      const text_alert = document.getElementById("text_alert");
+      const alert_file = document.getElementById("alert_file");
+      const icon_upload = document.getElementById("icon_upload");
+      const text_upload = document.getElementById("text_upload");
+      const text_upload2 = document.getElementById("text_upload2");
+      const previewImage = document.getElementById("previewImage");
+
+      dropzone.addEventListener("click", () => imageInput.click());
+
+      imageInput.addEventListener("change", (e) => {
+        const file = e.target.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = function (event) {
+            previewImage.src = event.target.result;
+            previewImage.classList.remove("hidden");
+            icon_upload.classList.add("hidden");
+            icon_upload.classList.remove("block");
+            text_upload.classList.add("hidden");
+            text_upload.classList.remove("block");
+            text_upload2.classList.add("hidden");
+            text_upload2.classList.remove("block");
+          };
+          reader.readAsDataURL(file);
+
+          const maxLength = 15; // Maksimal karakter yang ditampilkan
+          let fileName = file.name;
+
+          if (fileName.length > maxLength) {
+            fileName = fileName.slice(0, maxLength) + "..."; // Potong dan tambahkan "..."
+          }
+          text_alert.innerHTML = `File Terpilih: ${fileName}`;
+          alert_file.classList.add("flex");
+          alert_file.classList.remove("hidden");
+        }
+      });
+
+      // Drag & Drop functionality
+      dropzone.addEventListener("dragover", (event) => {
+        event.preventDefault();
+        dropzone.classList.add("border-blue-500");
+      });
+
+      dropzone.addEventListener("dragleave", () => {
+        dropzone.classList.remove("border-blue-500");
+      });
+
+      dropzone.addEventListener("drop", (event) => {
+        event.preventDefault();
+        dropzone.classList.remove("border-blue-500");
+
+        const files = event.dataTransfer.files;
+        if (files.length > 0) {
+          imageInput.files = files;
+          text_alert.innerHTML = `File Terpilih: ${file.name}`;
+          alert_file.classList.add("flex");
+          alert_file.classList.remove("hidden");
+        }
+      });
+
+      document.getElementById("uploadForm").addEventListener("submit", function (event) {
+        event.preventDefault(); // Mencegah form refresh halaman
+
+        const form = document.getElementById("uploadForm");
+        const formData = new FormData(form);
+
+        fetch("/prediksi/", {
+          method: "POST",
+          body: formData,
+          headers: {
+            "X-CSRFToken": document.querySelector("[name=csrfmiddlewaretoken]").value, // Kirim token CSRF
+          },
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            document.getElementById("result").innerText = "Prediksi: " + data.prediksi;
+          })
+          .catch((error) => console.error("Error:", error));
+      });
+    </script>
+  </body>
+</html>

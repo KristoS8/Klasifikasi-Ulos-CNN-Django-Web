@@ -1,32 +1,149 @@
 {% load static tailwind_tags %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Klasifikasi Ulos</title>
     {% tailwind_css %}{% load static %}
+    <script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
   </head>
-  <body class="h-screen">
-    <nav class="bg-blue-500 w-full h-20"></nav>
-    <section class="flex justify-center items-center h-5/6">
-      <div class="bg-gray-100 max-w-max p-10 rounded-lg">
-        <div class="text-blue-900 text-3xl font-bold mb-5">Upload Gambar Ulos</div>
+  <body>
+    <div>
+      <nav class="bg-red-500 w-full h-14 fixed top-0 right-0 left-0 z-50 flex justify-between animate-fade-in-up">
+        <div class="w-60 h-full flex justify-center items-center">
+          <a href="#home" class="text-white font-semibold text-xl">Ulos Batak Toba</a>
+        </div>
+        <div class="w-80 h-full">
+          <ul class="list-none flex w-full justify-evenly items-center h-full">
+            <li class="text-white font-semibold hover:text-gray-200 active:text-red-300"><a href="#tentang">Tentang</a></li>
+            <li class="text-white font-semibold hover:text-gray-200 active:text-red-300"><a href="#klasifikasi">Aplikasi</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+
+    <div id="home" class="relative" data-twe-carousel-init data-twe-ride="carousel">
+      <!--Carousel indicators-->
+      <div class="absolute bottom-0 left-0 right-0 z-[2] mx-[15%] mb-4 flex list-none justify-center p-0" data-twe-carousel-indicators>
+        <button
+          type="button"
+          data-twe-target="#carouselExampleIndicators"
+          data-twe-slide-to="0"
+          data-twe-carousel-active
+          class="mx-[3px] box-content h-[3px] w-[30px] flex-initial cursor-pointer border-0 border-y-[10px] border-solid border-transparent bg-white bg-clip-padding p-0 -indent-[999px] opacity-50 transition-opacity duration-[600ms] ease-[cubic-bezier(0.25,0.1,0.25,1.0)] motion-reduce:transition-none"
+          aria-current="true"
+          aria-label="Slide 1"
+        ></button>
+        <button
+          type="button"
+          data-twe-target="#carouselExampleIndicators"
+          data-twe-slide-to="1"
+          class="mx-[3px] box-content h-[3px] w-[30px] flex-initial cursor-pointer border-0 border-y-[10px] border-solid border-transparent bg-white bg-clip-padding p-0 -indent-[999px] opacity-50 transition-opacity duration-[600ms] ease-[cubic-bezier(0.25,0.1,0.25,1.0)] motion-reduce:transition-none"
+          aria-label="Slide 2"
+        ></button>
+        <button
+          type="button"
+          data-twe-target="#carouselExampleIndicators"
+          data-twe-slide-to="2"
+          class="mx-[3px] box-content h-[3px] w-[30px] flex-initial cursor-pointer border-0 border-y-[10px] border-solid border-transparent bg-white bg-clip-padding p-0 -indent-[999px] opacity-50 transition-opacity duration-[600ms] ease-[cubic-bezier(0.25,0.1,0.25,1.0)] motion-reduce:transition-none"
+          aria-label="Slide 3"
+        ></button>
+      </div>
+
+      <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center z-10">
+        <div class="text-center text-white">
+          <h1 class="text-5xl font-bold mb-4">Cari Tahu Ulos Anda!</h1>
+          <p class="text-lg mb-6">Dapatkan Informasi Jenis Ulos Anda Sekarang</p>
+          <a href="#klasifikasi" class="bg-red-500 text-white px-6 py-3 rounded-lg text-lg font-semibold hover:bg-red-600 active:bg-red-700">Ayo Mulai</a>
+        </div>
+      </div>
+
+      <div class="relative w-full overflow-hidden md:h-lvh h-screen">
+        <!-- First item -->
+        <div class="absolute inset-0 w-full transition-all duration-700 ease-in-out translate-x-0" data-twe-carousel-item data-twe-carousel-active>
+          <img src="{% static 'klasifikasi_ulos/img/bg4.jpg' %}" class="block w-full h-full" alt="Wild Landscape" />
+        </div>
+        <!-- Second item -->
+        <div class="absolute inset-0 w-full transition-all duration-700 ease-in-out translate-x-full opacity-0" data-twe-carousel-item>
+          <img src="{% static 'klasifikasi_ulos/img/bg5.png' %}" class="block w-full h-full" alt="Camera" />
+        </div>
+        <!-- Third item -->
+        <div class="absolute inset-0 w-full transition-all duration-700 ease-in-out translate-x-full opacity-0" data-twe-carousel-item>
+          <img src="{% static 'klasifikasi_ulos/img/bg6.jpeg' %}" class="block w-full h-full" alt="Exotic Fruits" />
+        </div>
+      </div>
+
+      <!--Carousel controls - prev item-->
+      <button
+        class="absolute bottom-0 left-0 top-0 z-20 flex w-[15%] items-center justify-center border-0 bg-none p-0 text-center text-white opacity-50 transition-opacity duration-150 ease-[cubic-bezier(0.25,0.1,0.25,1.0)] hover:text-white hover:no-underline hover:opacity-90 hover:outline-none focus:text-white focus:no-underline focus:opacity-90 focus:outline-none motion-reduce:transition-none"
+        type="button"
+        data-twe-target="#carouselExampleIndicators"
+        data-twe-slide="prev"
+      >
+        <span class="inline-block h-8 w-8">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+          </svg>
+        </span>
+        <span class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">Previous</span>
+      </button>
+      <!--Carousel controls - next item-->
+      <button
+        class="absolute bottom-0 right-0 top-0 z-20 flex w-[15%] items-center justify-center border-0 bg-none p-0 text-center text-white opacity-50 transition-opacity duration-150 ease-[cubic-bezier(0.25,0.1,0.25,1.0)] hover:text-white hover:no-underline hover:opacity-90 hover:outline-none focus:text-white focus:no-underline focus:opacity-90 focus:outline-none motion-reduce:transition-none"
+        type="button"
+        data-twe-target="#carouselExampleIndicators"
+        data-twe-slide="next"
+      >
+        <span class="inline-block h-8 w-8">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+          </svg>
+        </span>
+        <span class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">Next</span>
+      </button>
+    </div>
+
+    <!-- about dan sedikit penjelasan -->
+    <section class="py-20 relative animate-fade-in-up" id="tentang">
+      <div class="w-full max-w-7xl px-4 md:px-5 lg:px-5 mx-auto">
+        <div class="w-full justify-start items-center gap-8 grid lg:grid-cols-2 grid-cols-1">
+          <div class="w-full flex-col justify-start lg:items-start items-center gap-10 inline-flex">
+            <div class="w-full flex-col justify-start lg:items-start items-center gap-4 flex">
+              <h2 class="text-gray-900 text-4xl font-bold font-manrope leading-normal lg:text-start text-center">Kenali Jenis Ulos, Pahami Maknanya, dan Lestarikan Budaya Batak</h2>
+              <p class="text-gray-500 text-base font-normal leading-relaxed lg:text-start text-center">
+                Ulos bukan sekadar kain, tetapi warisan budaya penuh makna. Dengan teknologi berbasis kecerdasan buatan, kini Anda dapat dengan mudah mengenali jenis ulos hanya dengan mengunggah gambar. Temukan informasi mendalam tentang
+                sejarah, fungsi, dan nilai filosofi di balik setiap motif ulos. Mari bersama-sama menjaga warisan leluhur!
+              </p>
+            </div>
+            <a href="" class="sm:w-fit w-full px-3.5 py-2 bg-hijau-primary hover:bg-green-700 transition-all duration-700 ease-in-out rounded-lg shadow-[0px_1px_2px_0px_rgba(16,_24,_40,_0.05)] justify-center items-center flex">
+              <span class="px-1.5 text-white text-sm font-medium leading-6">Mulai</span>
+            </a>
+          </div>
+          <img class="lg:mx-0 mx-auto h-full rounded-3xl object-cover my-5 sm:my-0" src="{% static 'klasifikasi_ulos/img/about.jpg' %}" alt="about Us image" />
+        </div>
+      </div>
+    </section>
+
+    <!-- fitur utama klasifikasi -->
+    <div class="md:flex md:justify-start items-center h-screen md:ms-24 md:me-24" id="klasifikasi">
+      <div class="bg-red-100 max-w-max p-10 rounded-lg md:ms-5 ms-2 me-2">
+        <div class="text-gray-800 text-3xl font-bold mb-5">Upload Gambar Ulos</div>
         <form id="uploadForm" method="POST" enctype="multipart/form-data">
           {% csrf_token %}
           <!-- input gambar -->
-          <div id="dropzone" class="flex flex-col items-center justify-center w-72 h-40 border-2 border-dashed border-gray-300 rounded-xl p-6 bg-gray-50 cursor-pointer hover:border-blue-500 hover:bg-gray-100">
-            <svg xmlns="http://www.w3.org/2000/svg" id="icon_upload" class="h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <div id="dropzone" class="flex flex-col items-center justify-center w-72 h-40 border-2 border-dashed border-gray-300 rounded-xl p-6 bg-red-50 cursor-pointer hover:border-red-500 hover:bg-gray-100">
+            <svg xmlns="http://www.w3.org/2000/svg" id="icon_upload" class="h-12 w-12 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1M16 7l-4-4m0 0L8 7m4-4v12" />
             </svg>
             <img id="previewImage" class="hidden w-36 h-32 mt-3 mb-3 object-contain rounded-lg" />
-            <p class="text-gray-500 text-sm mt-2" id="text_upload">Drag & Drop or <span class="text-blue-500 font-semibold cursor-pointer">Choose file</span> to upload</p>
+            <p class="text-gray-500 text-sm mt-2" id="text_upload">Drag & Drop or <span class="text-gray-500 font-semibold cursor-pointer">Choose file</span> to upload</p>
             <p class="text-gray-400 text-xs mt-1" id="text_upload2">PNG, JPG, SVG, WEBP, and GIF are Allowed.</p>
             <input type="file" class="hidden" id="imageInput" name="image" accept="image/png, image/jpeg, image/svg+xml, image/webp, image/gif" />
           </div>
 
           <!-- alert upload gambar -->
-          <div id="alert_file" class="items-center hidden p-4 mb-4 mt-4 text-sm text-green-800 border border-green-300 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400 dark:border-green-800" role="alert">
+          <div id="alert_file" class="items-center hidden p-4 mb-2 mt-4 text-sm text-green-800 border border-green-300 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400 dark:border-green-800" role="alert">
             <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
               <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
             </svg>
@@ -36,14 +153,25 @@
             </div>
           </div>
           <div class="flex justify-center items-center w-full">
-            <button type="submit" class="bg-blue-400 p-3 mt-6 text-white rounded-lg font-semibold hover:bg-blue-500 active:bg-blue-600">Klasifikasikan</button>
+            <button type="submit" class="bg-red-400 p-3 mt-3 text-white rounded-lg font-semibold hover:bg-red-500 active:bg-red-600">Klasifikasikan</button>
           </div>
         </form>
 
-        <p id="result"></p>
+        <p id="hasil_prediksi" class="mt-2 mb-2 font-semibold text-red-950 hidden">Hasil Prediksi:</p>
+        <p id="result" class="text-blue-50 bg-red-400 text-lg font-semibold mb-5 mt-3 p-2 rounded-md text-center hidden"></p>
+        <p id="akurasi" class="font-semibold my-2 hidden"></p>
+        <span id="pertanyaan" class="border-2 text-red-800 text-xs font-medium me-2 border-red-800 rounded-md p-2 dark:bg-red-900 dark:text-red-300 items-center gap-1 cursor-pointer hover:bg-red-500 hover:text-white active:bg-red-600 flex">
+          <i class="ph ph-question text-lg me-1"></i>Apa itu
+          <p id="hasil"></p>
+        </span>
       </div>
-    </section>
-    <footer class="bg-blue-500 w-full h-14 absolute bottom-0"></footer>
+      <div id="penjelasan" class="bg-red-800 md:w-8/12 w-11/12 rounded-lg text-white text-sm p-3 ms-2 me-2 md:ms-5 invisible opacity-0 transition-opacity duration-1000 mt-5 md:mt-0 md:mb-0 h-max"></div>
+    </div>
+
+    <div class="md:h-max md:mt-10 h-screen flex items-end">
+      <footer class="bg-red-500 w-full h-10 text-white flex justify-center items-center text-sm md:mt-0 mt-96"><p>© 2025 Kristo Samosir. All Rights Reserved.</p></footer>
+    </div>
+
     <script>
       const dropzone = document.getElementById("dropzone");
       const imageInput = document.getElementById("imageInput");
@@ -53,6 +181,14 @@
       const text_upload = document.getElementById("text_upload");
       const text_upload2 = document.getElementById("text_upload2");
       const previewImage = document.getElementById("previewImage");
+      let result = document.getElementById("result");
+      let penjelasan = document.getElementById("penjelasan");
+      let hasil = document.getElementById("hasil");
+      let pertanyaan = document.getElementById("pertanyaan");
+      let hasil_prediksi = document.getElementById("hasil_prediksi");
+      let akurasi_prediksi = document.getElementById("akurasi");
+
+      pertanyaan.classList.add("hidden");
 
       dropzone.addEventListener("click", () => imageInput.click());
 
@@ -84,7 +220,7 @@
         }
       });
 
-      // Drag & Drop functionality
+      // Drag & Drop img
       dropzone.addEventListener("dragover", (event) => {
         event.preventDefault();
         dropzone.classList.add("border-blue-500");
@@ -122,9 +258,95 @@
         })
           .then((response) => response.json())
           .then((data) => {
-            document.getElementById("result").innerText = "Prediksi: " + data.prediksi;
+            result.innerText = "Ulos " + data.prediksi;
+            hasil.innerText = "Ulos " + data.prediksi + "?";
+            akurasi_prediksi.innerText = "Akurasi: " + data.akurasi_predict + "%";
+            result.classList.remove("hidden");
+            result.classList.add("block");
+            pertanyaan.classList.remove("hidden");
+            pertanyaan.classList.add("block");
+            hasil_prediksi.classList.add("block");
+            hasil_prediksi.classList.remove("hidden");
+            akurasi_prediksi.classList.add("block");
+            akurasi_prediksi.classList.remove("hidden");
+            pertanyaan.addEventListener("click", function (e) {
+              penjelasan.innerText = "Ulos " + data.penjelasan;
+              penjelasan.classList.remove("invisible");
+              penjelasan.classList.add("visible");
+              penjelasan.classList.remove("opacity-0");
+              penjelasan.classList.add("opacity-100");
+            });
           })
           .catch((error) => console.error("Error:", error));
+      });
+
+      // img slide
+      document.addEventListener("DOMContentLoaded", function () {
+        const carousel = document.querySelector("#home");
+        const items = carousel.querySelectorAll("[data-twe-carousel-item]");
+        const indicators = carousel.querySelectorAll("[data-twe-slide-to]");
+        const nextButton = carousel.querySelector("[data-twe-slide='next']");
+        const prevButton = carousel.querySelector("[data-twe-slide='prev']");
+        let currentIndex = 0;
+        let interval;
+
+        function updateCarousel(index) {
+          items.forEach((item, i) => {
+            item.classList.remove("translate-x-0", "translate-x-full", "-translate-x-full", "opacity-100", "opacity-0");
+            item.classList.add("absolute", "inset-0", "w-full", "transition-transform", "duration-700", "ease-in-out");
+
+            if (i === index) {
+              item.classList.add("translate-x-0");
+            } else if (i < index) {
+              item.classList.add("-translate-x-full");
+            } else {
+              item.classList.add("translate-x-full");
+            }
+          });
+
+          indicators.forEach((indicator, i) => {
+            indicator.classList.toggle("opacity-100", i === index);
+            indicator.classList.toggle("opacity-50", i !== index);
+          });
+        }
+
+        function nextSlide() {
+          currentIndex = (currentIndex + 1) % items.length;
+          updateCarousel(currentIndex);
+        }
+
+        function startAutoSlide() {
+          interval = setInterval(nextSlide, 8000);
+        }
+
+        function stopAutoSlide() {
+          clearInterval(interval);
+        }
+
+        nextButton.addEventListener("click", function () {
+          stopAutoSlide();
+          nextSlide();
+          startAutoSlide();
+        });
+
+        prevButton.addEventListener("click", function () {
+          stopAutoSlide();
+          currentIndex = (currentIndex - 1 + items.length) % items.length;
+          updateCarousel(currentIndex);
+          startAutoSlide();
+        });
+
+        indicators.forEach((indicator, i) => {
+          indicator.addEventListener("click", function () {
+            stopAutoSlide();
+            currentIndex = i;
+            updateCarousel(currentIndex);
+            startAutoSlide();
+          });
+        });
+
+        updateCarousel(currentIndex);
+        startAutoSlide();
       });
     </script>
   </body>
